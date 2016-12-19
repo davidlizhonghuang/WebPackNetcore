@@ -16,3 +16,16 @@ Webpack is the module bundler, AMD and requirejs is its competitor. Webpack beco
 9, no matter how many js file, we can use webpack to consolidate them into on js file for html page. this is siimple and easy to implement.
 </pre>
 Webpack better is running in cmd format, this enables us to simplify visual studio tasks.
+
+###Requirejs module loader
+
+js module is the class of c#. load module in js means load a class in c#. module loader avoids us to hard code of each js file in < script > tag inside the head element. we AMD load js files from js folder.
+
+The basic principle is we create a js file or a class file such as user.js with a define (function(){}) method. then requirejs will require this js file name, require will find out this js file and import function into it. load js object into main.js, main.js then is called by html to integrate js data into html. so the file tructure would like this. entity class object js file such as user.js, food.js,etc. is loaded into main.js via require DI require(['a'],function(a){}); See example below
+<pre>
+<img src="webp2.png">
+<img src="webp3.png">
+<img src="webp4.png">
+<img src="webp5.png">
+</pre>
+
