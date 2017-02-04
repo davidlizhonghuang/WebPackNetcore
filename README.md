@@ -17,15 +17,43 @@ Webpack is the module bundler, AMD and requirejs is its competitor. Webpack beco
 </pre>
 Webpack better is running in cmd format, this enables us to simplify visual studio tasks.
 
-###Requirejs module loader
+###Requirejs in asp.net MVC project
 
-js module is the class of c#. load module in js means load a class in c#. module loader avoids us to hard code of each js file in < script > tag inside the head element. we AMD load js files from js folder.
+ asp.net MVC project @script section can be used to assign different javascripts to differnet pages when we add @script section in _layout.cshtml. Each child pages then will insert @section Scripts {} into html to call javascript.
+ 
+ We may download a lt of js files into projects for some templates. we simply add all js file via < script > tags. so one page may contains over 20 js files, this will slow down the page loading. How about we just call js files we need in the page? We use requirejs. this can execute the js in run time and clean up the memory for next page action. the page loading performance can be improved. 
+ 
+Require js can be used in each page to load the js file as code below
 
-The basic principle is we create a js file or a class file such as user.js with a define (function(){}) method. then requirejs will require this js file name, require will find out this js file and import function into it. load js object into main.js, main.js then is called by html to integrate js data into html. so the file tructure would like this. entity class object js file such as user.js, food.js,etc. is loaded into main.js via require DI require(['a'],function(a){}); See example below
 <pre>
-<img src="webp2.png">
-<img src="webp3.png">
-<img src="webp4.png">
-<img src="webp5.png">
+
+ < script src="~/Scripts/require.js">< /script>
+    @RenderSection("scripts", required: false)
+ < /body>
+ 
+ 
+@section Scripts {
+    < script type="text/javascript">
+        require(["../Scripts/main"],function () {
+            require(["currentDateTime", "customer"],
+            function (currentDateTime, customer) {
+                currentDateTime; 
+                customer;
+            }
+            );
+        });
+        < /script>
+        }
+        
 </pre>
 
+customer.js file is the one we develop for the whole application. we simply call this in each apge via requirejs way.
+
+this is all. of course, we need do some confiuration first. 
+
+This technique can greatly improve the js file load in page to speed the page loading.
+
+
+
+
+ 
